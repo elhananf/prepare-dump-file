@@ -26,3 +26,6 @@ go.work.sum
 
 # Mac stuff
 .DS_Store
+
+# Misc
+test*.sql

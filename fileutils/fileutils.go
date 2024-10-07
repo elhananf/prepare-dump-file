@@ -24,7 +24,9 @@ func OpenFileForReading(filePath string) (*os.File, error) {
 
 func ReadLinesFromFile(inputFile *os.File) ([]string, error) {
 	var lines []string
+	buffer := make([]byte, 0, 64*1024)
 	scanner := bufio.NewScanner(inputFile)
+	scanner.Buffer(buffer, 1024*1024)
 
 	for scanner.Scan() {
 		lines = append(lines, scanner.Text())
@@ -39,6 +41,7 @@ func WriteLinesToFile(lines []string, outputFile *os.File) error {
 	for _, line := range lines {
 		fmt.Fprintln(w, line)
 	}
+	w.Flush()
 
 	return nil
 }

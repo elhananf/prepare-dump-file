@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"slices"
 
 	"github.com/elhananf/prepare-dump-file/cmd"
@@ -19,5 +20,9 @@ func main() {
 	}
 
 	inputPath, outputPath := args[0], args[1]
-	fmt.Printf("%s -> %s\n", inputPath, outputPath)
+
+	err := cmd.PrepareDump(inputPath, outputPath)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
